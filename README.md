@@ -51,6 +51,5 @@ You can install this node either manually or via ComfyUI Manager.
 
    ```bash
    cd /path/to/ComfyUI/custom_nodes
-   ```bash 
    git clone https://github.com/GeneralAlgren/ComfyUI-AMDGPUMonitor.git
 
