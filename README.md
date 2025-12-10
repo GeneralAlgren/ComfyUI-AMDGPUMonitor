@@ -1,65 +1,53 @@
-# AMD GPU Monitor for ComfyUI
+# ComfyUI AMD GPU Monitor (Multi-GPU Fork)
 
-A simple, lightweight AMD GPU monitoring tool for ComfyUI that displays real-time information about your AMD GPU directly in the UI.
+A lightweight AMD GPU overlay for ComfyUI that shows **live utilization, VRAM usage, and temperature** for **all** detected AMD GPUs, with a compact, Crystools-style UI.
 
-![AMD GPU Monitor Screenshot](https://github.com/iDAPPA/ComfyUI-AMDGPUMonitor/raw/main/screenshot.png)
+This is a fork of [iDAPPA/ComfyUI-AMDGPUMonitor](https://github.com/iDAPPA/ComfyUI-AMDGPUMonitor) with multi-GPU support and a richer frontend panel.
 
-## Features
+---
 
-- Real-time GPU utilization monitoring (%)
-- VRAM usage tracking (both in MB/GB and percentage)
-- GPU temperature monitoring (°C)
-- Color-coded indicators (blue for low, orange for medium, red for high usage)
-- Draggable, collapsible, and closable UI
-- Position persistence between sessions
-- Works with ROCm-enabled GPUs
-- Specifically tested with AMD Radeon RX 7900 XTX
+## ✨ Features
 
-## Installation
+- ✅ **Multi-GPU support**  
+  Automatically detects all AMD GPUs (`card0`, `card1`, …) via `rocm-smi` / `amd-smi` and shows each one in its own row.
 
-1. Clone the repository into your ComfyUI custom nodes directory:
+- ✅ **Per-GPU stats**
+  - GPU utilization %
+  - VRAM used / total (MB/GB) and %
+  - Temperature (°C)
 
-```bash
-cd /path/to/ComfyUI/custom_nodes
-git clone https://github.com/iDAPPA/ComfyUI-AMDGPUMonitor.git
-```
+- ✅ **Driver / platform info**
+  - Shows backend platform (e.g. ROCm) and driver / SMI versions in the header (when available).
 
-2. Restart ComfyUI
+- ✅ **Compact floating panel**
+  - Draggable overlay inside ComfyUI
+  - Collapse / expand
+  - Remember position and closed state via `localStorage`
 
-## Requirements
+- ✅ **Node still works**
+  - The `AMDGPUMonitor` node remains available in the node list so you can:
+    - Control the update interval
+    - Pipe a human-readable stats string into logs or other nodes
 
-- An AMD GPU with ROCm support
-- `rocm-smi` or `amd-smi` command-line tools installed and accessible in your PATH
-- ComfyUI running on a Linux system with ROCm drivers
+---
 
-## Usage
+## 📦 Requirements
 
-No setup is required. Once installed, the monitor will automatically appear in the top-right corner of ComfyUI's interface.
+- ComfyUI (latest recommended)
+- Linux with AMD GPU
+- ROCm or AMD driver stack providing:
+  - `rocm-smi` **or** `amd-smi` available on `$PATH` or in common locations  
+- Python libraries: only standard library is used; no extra `pip` deps required
 
-### Monitor Features:
+---
 
-- **Drag**: Click and hold the title bar to move the monitor anywhere on the screen
-- **Collapse/Expand**: Click the "−" button to collapse the monitor to just the title bar
-- **Close**: Click the "×" button to close the monitor (a "Show AMD GPU Monitor" button will appear to bring it back)
+## 🔧 Installation
 
-## How It Works
+You can install this node either manually or via ComfyUI Manager.
 
-This extension uses the `rocm-smi` command-line tool to collect GPU information and displays it in a floating UI element in the ComfyUI interface. It does not affect the performance of ComfyUI or your GPU.
+### Method 1 — Manual install
 
-## Troubleshooting
+1. Go to your ComfyUI `custom_nodes` directory, e.g.:
 
-If the monitor doesn't appear or doesn't show any data:
-
-1. Check if `rocm-smi` is installed and working by running it in a terminal
-2. Make sure your AMD GPU is properly detected by the system
-3. Verify that you're running ComfyUI with ROCm support
-4. Check the browser console for any JavaScript errors
-
-## Credits
-
-- Inspired by the GPU monitoring in [ComfyUI-Crystools](https://github.com/crystian/ComfyUI-Crystools)
-- Created with the help of Claude AI
-
-## License
-
-MIT License
+   ```bash
+   cd /path/to/ComfyUI/custom_nodes
